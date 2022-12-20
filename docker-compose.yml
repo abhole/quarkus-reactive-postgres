@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  canopy-mssql:
+    image: "mcr.microsoft.com/azure-sql-edge"
+    container_name: canopy-mssql-db
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=1
+      - MSSQL_PID=Developer
+      - MSSQL_DB=mydatabase
+      - MSSQL_USER=SA
+      - MSSQL_SA_PASSWORD=MyPassword123
+    networks:
+      - cpy
+
+  canopy-redis:
+    image: "library/redis:6.0.10-alpine"
+    command: redis-server --requirepass scaredispass
+    container_name: canopy-redis-cache
+    environment:
+      - REDIS_PASSWORD=canopyredispass
+    ports:
+      - "6379:6379"
+    networks:
+      - cpy
+
+#  canopy-api:
+#    build:
+#      context: .
+#      dockerfile: src/main/docker/Dockerfile.jvm
+#    container_name: canopy-java-api
+#    environment:
+#      - MSSQL_DB=mydatabase
+#      - MSSQL_USER=SA
+#      - MSSQL_SA_PASSWORD=MyP@ssword
+#      - MSSQL_HOST=canopy-mssql
+#      - REDIS_HOST=canopy-redis
+#      - REDIS_PASSWORD=canopyredispass
+#      - QUARKUS_PROFILE=dev
+#    expose:
+#      - 8080
+#      - 5005
+#    ports:
+#      - "8080:8080"
+#      - "5005:5005"
+#    depends_on:
+#      - canopy-mssql
+#      - canopy-redis
+#    networks:
+#      - cpy
+
+networks:
+  cpy:
+    driver: bridge
