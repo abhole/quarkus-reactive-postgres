@@ -1,4 +1,4 @@
-package com.jllt.canopy.common;
+package org.api.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;

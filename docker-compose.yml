@@ -1,43 +1,38 @@
 version: "3.7"
 
 services:
-  canopy-mssql:
-    image: "mcr.microsoft.com/azure-sql-edge"
-    container_name: canopy-mssql-db
+  api-postgres:
+    image: "library/postgres:15.1-alpine"
+    container_name: postgres-db
     ports:
-      - "1433:1433"
+      - "5432:5432"
     environment:
-      - ACCEPT_EULA=1
-      - MSSQL_PID=Developer
-      - MSSQL_DB=mydatabase
-      - MSSQL_USER=SA
-      - MSSQL_SA_PASSWORD=MyPassword123
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=quarkus
+      - POSTGRES_PASSWORD=MyPassword
     networks:
-      - cpy
+      - apint
 
-  canopy-redis:
-    image: "library/redis:6.0.10-alpine"
-    command: redis-server --requirepass scaredispass
-    container_name: canopy-redis-cache
+  api-redis:
+    image: "library/redis:7.0.7-alpine"
+    command: redis-server --requirepass apiredispass
+    container_name: redis-cache
     environment:
-      - REDIS_PASSWORD=canopyredispass
+      - REDIS_PASSWORD=apiredispass
     ports:
       - "6379:6379"
     networks:
-      - cpy
+      - apint
 
-#  canopy-api:
+#  api-service:
 #    build:
 #      context: .
 #      dockerfile: src/main/docker/Dockerfile.jvm
-#    container_name: canopy-java-api
+#    container_name: services-java-api
 #    environment:
-#      - MSSQL_DB=mydatabase
-#      - MSSQL_USER=SA
-#      - MSSQL_SA_PASSWORD=MyP@ssword
-#      - MSSQL_HOST=canopy-mssql
-#      - REDIS_HOST=canopy-redis
-#      - REDIS_PASSWORD=canopyredispass
+#      - POSTGRES_DB=mydatabase
+#      - POSTGRES_USER=quarkus
+#      - POSTGRES_PASSWORD=MyPassword
 #      - QUARKUS_PROFILE=dev
 #    expose:
 #      - 8080
@@ -46,11 +41,11 @@ services:
 #      - "8080:8080"
 #      - "5005:5005"
 #    depends_on:
-#      - canopy-mssql
-#      - canopy-redis
+#      - apint-postgres
+#      - apint-redis
 #    networks:
-#      - cpy
+#      - apint
 
 networks:
-  cpy:
+  apint:
     driver: bridge

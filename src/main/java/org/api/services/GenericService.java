@@ -1,4 +1,4 @@
-package com.jllt.canopy.services;
+package org.api.services;
 
 import io.smallrye.mutiny.Uni;
 

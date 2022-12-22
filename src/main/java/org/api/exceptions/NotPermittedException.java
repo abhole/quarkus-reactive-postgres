@@ -1,4 +1,4 @@
-package com.jllt.canopy.exceptions;
+package org.api.exceptions;
 
 public class NotPermittedException extends Exception {
     public NotPermittedException(String message) {

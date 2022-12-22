@@ -1,4 +1,4 @@
-package com.jllt.canopy.entities;
+package org.api.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,23 +11,23 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "building")
-public class Building {
+@Table(name = "person")
+public class Person {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(name = "building_id", nullable = false)
-    private String buildingId;
+    @Column(name = "person_id", nullable = false)
+    private String personId;
 
     @Column(name = "name", nullable = false)
     @NotBlank
     @Size(max = 50)
     public String name;
 
-    @Column(name = "opened", nullable = false)
+    @Column(name = "birth", nullable = false)
     @NotNull
-    public LocalDate opened;
+    public LocalDate birth;
 
     @Column(name = "location", nullable = false)
     @NotBlank

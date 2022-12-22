@@ -1,4 +1,4 @@
-package com.jllt.canopy.exceptions;
+package org.api.exceptions;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;

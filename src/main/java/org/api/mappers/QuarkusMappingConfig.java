@@ -1,4 +1,4 @@
-package com.jllt.canopy.mappers;
+package org.api.mappers;
 
 import org.mapstruct.MapperConfig;
 

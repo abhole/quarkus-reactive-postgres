@@ -1,31 +1,32 @@
-package com.jllt.canopy.services;
+package org.api.services;
 
-import com.jllt.canopy.entities.Building;
-import com.jllt.canopy.repositories.BuildingRepository;
+import org.api.entities.Person;
+import org.api.repositories.PersonRepository;
 import io.smallrye.mutiny.Uni;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import java.util.List;
 
 @ApplicationScoped
-public class BuildingService implements GenericService<Building> {
+public class PersonService implements GenericService<Person> {
 
     @Inject
-    BuildingRepository buildingRepository;
+    PersonRepository personRepository;
 
     public Uni<Long> count(){
-        return buildingRepository.count();
+        return personRepository.count();
     }
 
     @Override
-    public Uni<Building> findById(String id) {
-        return buildingRepository.findById(id);
+    public Uni<Person> findById(String id) {
+        return personRepository.findById(id);
     }
 
     @Override
-    public Uni<List<Building>> getAll() {
-        return buildingRepository.listAll();
+    public Uni<List<Person>> getAll() {
+        return personRepository.listAll();
     }
 
 //    @Override
@@ -42,12 +43,12 @@ public class BuildingService implements GenericService<Building> {
 //    }
 
     @Override
-    public Uni<Building> save(Building b) {
-        return buildingRepository.persistAndFlush(b);
+    public Uni<Person> save(Person b) {
+        return personRepository.persistAndFlush(b);
     }
 
     @Override
     public Uni<Boolean> delete(String id) {
-        return buildingRepository.deleteById(id);
+        return personRepository.deleteById(id);
     }
 }

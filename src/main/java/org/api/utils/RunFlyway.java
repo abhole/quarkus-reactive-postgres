@@ -1,4 +1,4 @@
-package com.jllt.canopy.utils;
+package org.api.utils;
 
 import io.quarkus.runtime.StartupEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

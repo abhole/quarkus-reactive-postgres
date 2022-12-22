@@ -1,7 +1,7 @@
-package com.jllt.canopy.mappers;
+package org.api.mappers;
 
-import com.jllt.canopy.dto.BuildingDto;
-import com.jllt.canopy.entities.Building;
+import org.api.dto.PersonDto;
+import org.api.entities.Person;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
@@ -11,18 +11,18 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(config = QuarkusMappingConfig.class, unmappedTargetPolicy = ReportingPolicy.IGNORE, unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public interface BuildingMapper {
-    BuildingMapper INSTANCE = Mappers.getMapper(BuildingMapper.class);
+public interface PersonMapper {
+    PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
     @Named("dtoToEntity")
-    Building buildingDtoToBuilding(BuildingDto source);
+    Person personDtoToPerson(PersonDto source);
 
     @Named("entityToDto")
-    BuildingDto buildingToBuildingDto(Building source);
+    PersonDto personToPersonDto(Person source);
 
     @IterableMapping(qualifiedByName="entityToDto")
-    List<BuildingDto> buildingsToBuildingsDto(List<Building> buildingList);
+    List<PersonDto> personsToPersonsDto(List<Person> personList);
 
     @IterableMapping(qualifiedByName="dtoToEntity")
-    List<Building> buildingDtosToBuildings(List<BuildingDto> buildingDtoList);
+    List<Person> personDtosToPersons(List<PersonDto> personDtoList);
 }
